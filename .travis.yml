@@ -18,3 +18,16 @@ after_success:
   - docker push henriquerusca/multi-nginx
   - docker push henriquerusca/multi-server
   - docker push henriquerusca/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-2
+  app: docker-kubernetes
+  env: DockerKubernetes-env
+  bucket_name: elasticbeanstalk-us-west-2-397384686540
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ID
+  secret_access_key:
+    secure: $AWS_PASSWORD
